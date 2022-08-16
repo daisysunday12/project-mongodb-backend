@@ -10,6 +10,14 @@ let pekerjaanSchema = mongoose.Schema(
       type: String,
       require: [true, "Deskripsi Pekerjaan harus di isi"],
     },
+    thumbnial: {
+      type: String,
+    },
+    status: {
+      type: String,
+      enum: ["Y", "N"],
+      default: "Y",
+    },
   },
   { timestamps: true }
 );

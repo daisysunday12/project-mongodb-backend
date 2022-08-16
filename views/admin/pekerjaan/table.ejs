@@ -1,3 +1,4 @@
+<%= data.length %>
 <table id="example2" class="table table-bordered table-hover">
   <thead>
     <tr>
@@ -5,28 +6,53 @@
       <th>Pekerjaan</th>
       <th>Deskripsi Pekerjaan</th>
       <th>Banner</th>
+      <th>Status</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <% for(let i = 0; i < data.length; i++){ %>
     <tr>
-      <td><%= i + 1 %></td>
+      <td class="text-center"><%= i + 1 %></td>
       <td><%= data[i].pekerjaan %></td>
       <td><%= data[i].deskripsiPekerjaan %></td>
-      <td>2</td>
+      <td class="text-center">
+        <img
+          src="/uploads/banner-pekerjaan/<%= data[i].thumbnial%>"
+          alt=""
+          srcset=""
+          width="50"
+        />
+      </td>
+      <td class="text-center">
+        <% if(data[i].status=== 'Y'){ %>
+        <span class="badge badge-success">Aktif</span>
+        <% } else { %> <span class="badge badge-danger">Non Aktif</span> <%} %>
+      </td>
       <td>
         <form
+          action="/pekerjaan/status/<%= data[i]._id %>?_method=PUT"
+          method="POST"
+          style="display: inline-block"
+        >
+          <button class="btn btn-primary btn-sm">
+            <i class="fas fa-folder"></i>
+            <% if(data[i].status === 'Y') { %> Matikan <% } else { %> Hidupkan
+            <% } %>
+          </button>
+        </form>
+        <a
+          href="/pekerjaan/edit/<%= data[i]._id %>"
+          class="btn btn-info btn-sm"
+        >
+          <i class="fas fa-pencil-alt"></i>
+          Ubah
+        </a>
+        <form
+          style="display: inline-block"
           action="/pekerjaan/delete/<%= data[i]._id %>?_method=DELETE"
           method="POST"
         >
-          <a
-            href="/pekerjaan/edit/<%= data[i]._id %>"
-            class="btn btn-info btn-sm"
-          >
-            <i class="fas fa-pencil-alt"></i>
-            Ubah
-          </a>
           <button class="btn btn-danger btn-sm">
             <i class="fas fa-trash"></i>
             Hapus

@@ -34,6 +34,7 @@
             <form
               action="/pekerjaan/edit/<%= data._id %>?_method=PUT"
               method="POST"
+              enctype="multipart/form-data"
             >
               <div class="card-body">
                 <div class="form-group">
@@ -63,10 +64,15 @@
                   <label for="name">File Banner</label>
                   <input
                     type="file"
-                    name="banner"
+                    name="image"
                     class="form-control p-1"
-                    id="name"
-                    placeholder="Masukan nama kategori"
+                    id="image"
+                    placeholder="Masukan Image"
+                  />
+                  <br />
+                  <img
+                    src="http://localhost:3000/uploads/banner-pekerjaan/<%=data.thumbnial %>"
+                    id="perview"
                   />
                 </div>
               </div>
@@ -86,3 +92,22 @@
 </div>
 
 <%- include ../../partials/footer.ejs %> <%- include ../../partials/js.ejs %>
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        $("#perview").attr("src", e.target.result);
+        $("#perview").attr("width", "20%");
+        $("#perview").attr("height", "20%");
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#image").change(function () {
+    readURL(this);
+  });
+</script>
