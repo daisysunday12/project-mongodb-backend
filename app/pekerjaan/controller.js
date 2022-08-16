@@ -13,6 +13,7 @@ module.exports = {
     const data = await Pekerjaan.find();
     try {
       res.render("admin/pekerjaan/view_pekerjaan", {
+        nama: req.session.user.name,
         data,
         alert,
         title: "Halaman Pekerjaan",

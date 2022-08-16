@@ -12,7 +12,9 @@ const {
   actionDelete,
   actionStatus,
 } = require("./controller");
+const { isLoginAdmin } = require("../middleware/auth");
 
+router.use(isLoginAdmin);
 /* GET home page. */
 router.get("/", index);
 router.get("/create", viewCreate);
