@@ -1,0 +1,158 @@
+<%- include ../../partials/header.ejs %>
+  <%- include ../../partials/navbar.ejs %>
+    <%- include ../../partials/sidebar.ejs %>
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Kandidat</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item"><a href="/kandidat">Kandidat</a></li>
+                  <li class="breadcrumb-item active">Tambah</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Form Tambah Kandidat</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                  <form action="/kandidat/create" method="POST" enctype="multipart/form-data">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label for="name">Pekerjaan</label>
+                        <select class="select2" data-placeholder="Pekerjaan" style="width: 100%;" name="pekerjaan">
+                          <option selected="selected">Pilih kategori</option>
+                          <% dataPekerjaan.forEach(dataPekerjaan=>{ %>
+                            <option value="<%= dataPekerjaan._id %>">
+                              <%= dataPekerjaan.pekerjaan %>
+                            </option>
+                            <% }) %>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="name">Nama Kandidat</label>
+                        <input type="text" name="nama" class="form-control" id="name" placeholder="Masukan Pekerjaan"
+                          autocomplete="off" required />
+                      </div>
+                      <div class="row form-group">
+                        <div class="col-6">
+                          <label for="name">Tempat lahir</label>
+                          <input type="text" name="tempat" class="form-control" id="name"
+                            placeholder="Masukan Pekerjaan" autocomplete="off" required />
+                        </div>
+                        <div class="col-6">
+                          <label for="name">Tanggal lahir</label>
+                          <input type="date" name="tanggal" class="form-control" id="name"
+                            placeholder="Masukan Pekerjaan" required />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="textarea-ckeditor">Alamat</label>
+                        <textarea id="textarea-ckeditor" name="alamat" class="ckeditor form-control"
+                          rows="5"></textarea>
+                      </div>
+                      <div class="row form-group">
+                        <div class="col-3">
+                          <label for="name">Kabupaten</label>
+                          <input type="text" name="kab" class="form-control" id="name" placeholder="Masukan Kabupaten"
+                            autocomplete="off" required />
+                        </div>
+                        <div class="col-3">
+                          <label for="name">Provinsi</label>
+                          <input type="text" name="prov" class="form-control" id="name" placeholder="Masukan Provinsi"
+                            required />
+                        </div>
+                        <div class="col-3">
+                          <label for="name">Kewarganegaraan</label>
+                          <input type="text" name="Kewarganegaraan" class="form-control" id="name"
+                            placeholder="Masukan Kewarganegaraan" required />
+                        </div>
+                        <div class="col-3">
+                          <label for="name">No Telp</label>
+                          <input type="text" name="notelp" class="form-control" id="name" placeholder="Masukan No Telp"
+                            required />
+                        </div>
+                      </div>
+                      <div class="row form-group">
+                        <div class="col-6">
+                          <label for="name">Pendidikan Terakhir</label>
+                          <input type="text" name="pendidikan" class="form-control" id="name"
+                            placeholder="Masukan Pendidikan Terakhir" autocomplete="off" required />
+                        </div>
+                        <div class="col-6">
+                          <label for="jurusan">Jurusan</label>
+                          <input type="text" name="jurusan" class="form-control" id="jurusan"
+                            placeholder="Masukan Jurusan" required />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="textarea-ckeditor">Lokasi Sekarang</label>
+                        <textarea id="textarea-ckeditor" name="lokasi" class="ckeditor form-control"
+                          rows="5"></textarea>
+                      </div>
+                      <div class="row form-group">
+                        <div class="col-6">
+                          <label for="sumber">Sumber Loker</label>
+                          <input type="text" name="sumber" class="form-control" id="sumber"
+                            placeholder="Masukan Pendidikan Terakhir" autocomplete="off" required />
+                        </div>
+                        <div class="col-6">
+                          <label for="ket">Keterangan Sumber</label>
+                          <input type="text" name="ketsumber" class="form-control" id="ket"
+                            placeholder="Masukan Sumber Keterangan Loker" />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="name">Salary</label>
+                        <select class="select2" data-placeholder="Pekerjaan" style="width: 100%;" name="salary">
+                          <option selected="selected" disabled>Pilih kategori</option>
+                          <option value="2.000.000">2.000.000</option>
+                          <option value="2.000.000 - 4.000.000">2.000.000 - 4.000.000</option>
+                          <option value="4.000.000 - 6.000.000">4.000.000 - 6.000.000</option>
+                          <option value="7.000.000 - 10.000.000">7.000.000 - 10.000.000</option>
+                          <option value="10.000.000 - 13.000.000">10.000.000 - 13.000.000</option>
+                          <option value="13.000.000 - 15.000.000">13.000.000 - 15.000.000</option>
+                          <option value="15.000.000 - 20.000.000">15.000.000 - 20.000.000</option>
+                          <option value="Diatas 20.000.000">Diatas 20.000.000</option>
+                        </select>
+                        <div class="form-group row">
+                          <div class="col-12">
+                            <label for="name">File</label>
+                            <input type="file" name="image" class="form-control p-1" id="image"
+                              placeholder="Masukan File" />
+                          </div>
+                        </div>
+                        <div class="card-footer">
+                          <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                  </form>
+                </div>
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+
+      <%- include ../../partials/footer.ejs %>
+        <%- include ../../partials/js.ejs %>

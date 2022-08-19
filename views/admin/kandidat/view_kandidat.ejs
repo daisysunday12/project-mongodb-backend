@@ -1,16 +1,17 @@
-<%- include ../../partials/header.ejs %> <%- include ../../partials/navbar.ejs %> <%- include ../../partials/sidebar.ejs %>
+<%- include ../../partials/header.ejs %> <%- include ../../partials/navbar.ejs
+%> <%- include ../../partials/sidebar.ejs %>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Pekerjaan</h1>
+          <h1>Kandidat</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active">Pekerjaan</li>
+            <li class="breadcrumb-item active">Kandidat</li>
           </ol>
         </div>
       </div>
@@ -26,14 +27,17 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">
-                <a href="/pekerjaan/create" class="btn btn-primary">
+                <a href="/kandidat/create" class="btn btn-primary">
                   <i class="nav-icon far fa-plus-square"></i>
                   Tambah
                 </a>
               </h3>
             </div>
             <!-- /.card-header -->
-            <div class="card-body"><%- include ../../partials/message.ejs %> <%- include ./table.ejs %></div>
+            <div class="card-body">
+              <%- include ../../partials/message.ejs %> <%- include ./table.ejs
+              %>
+            </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->

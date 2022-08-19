@@ -1,0 +1,49 @@
+<table id="example2" class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Nama</th>
+      <th>TTL</th>
+      <th>JK</th>
+      <th>Pendidikan</th>
+      <th>Jurusan</th>
+      <th>Foto</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let i=0; i < data.length; i++){ %>
+      <tr>
+        <td>
+          <%= i + 1 %>
+        </td>
+        <td>
+          <%= data[i].nama %>
+        </td>
+        <td>
+          <%= data[i].tempat %>,
+            <%= data[i].tanggallahir %>
+        </td>
+        <td>
+          <%= data[i].jk %>
+        </td>
+        <td>
+          <%= data[i].pendidikan %>
+        </td>
+        <td>
+          <%= data[i].jurusan %>
+        </td>
+        <td>
+          <%= data[i].pekerjaan.pekerjaan %>
+        </td>
+        <td>
+
+        </td>
+        <td>
+
+        </td>
+      </tr>
+      <% } %>
+  </tbody>
+</table>
