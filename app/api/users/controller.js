@@ -1,4 +1,9 @@
 const User = require("../../users/model");
+const bcrypt = require("bcryptjs");
+
+const path = require("path");
+const fs = require("fs");
+const config = require("../../../config");
 
 module.exports = {
   users: async (req, res) => {
@@ -28,7 +33,7 @@ module.exports = {
             const hashPassword = await bcrypt.hash(password, 10);
             const apiData = new User({ ...payload, password: hashPassword, image: filename });
             await apiData.save();
-            res.status(201).json({ msg: success, data: apiData });
+            res.status(201).json({ msg: "success", data: apiData });
           } catch (err) {
             if (err && err.name === "ValidationError") {
               return res.status(422).json({
@@ -42,10 +47,10 @@ module.exports = {
         });
       } else {
         const hashPassword = await bcrypt.hash(password, 10);
-        let data = new User({ ...payload, password: hashPassword });
-        await data.save();
+        let apiData = new User({ ...payload, password: hashPassword });
+        await apiData.save();
 
-        res.status(201).json({ msg: success, data: apiData });
+        res.status(201).json({ msg: "success", data: apiData });
       }
     } catch (err) {
       if (err && err.name === "ValidationError") {
