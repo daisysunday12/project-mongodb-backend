@@ -50,8 +50,8 @@ app.use("/adminlte", express.static(path.join(__dirname, "/node_modules/admin-lt
 app.use("/users", usersRouter);
 
 // api
-// app.use(`${URL}/pekerjaan`, apiPekerjaanRouter);
-// app.use(`${URL}/kandidat`, apiKandidatRouter);
+app.use(`${URL}/pekerjaan`, apiPekerjaanRouter);
+app.use(`${URL}/kandidat`, apiKandidatRouter);
 app.use(`${URL}/users`, apiUsersRouter);
 
 // catch 404 and forward to error handler

@@ -71,8 +71,8 @@ let kandidatSchema = mongoose.Schema(
     lokasi: {
       type: String,
       require: [true, "Deskripsi Lokasi Sekarang Harus Di Isi"],
-      maxlength: [100, "panjang lokasi sekarang harus antara 3 - 100 karakter"],
-      minlength: [5, "panjang lokasi sekarang harus antara 3 - 100 karakter"],
+      maxlength: [100, "panjang lokasi sekarang harus antara 5 - 100 karakter"],
+      minlength: [5, "panjang lokasi sekarang harus antara 5 - 100 karakter"],
     },
     sumber: {
       type: String,
@@ -92,6 +92,7 @@ let kandidatSchema = mongoose.Schema(
     },
     file: {
       type: String,
+      default: "default.pdf",
     },
     image: {
       type: String,
