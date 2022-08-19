@@ -5,9 +5,10 @@ var router = express.Router();
 const multer = require("multer");
 const os = require("os");
 
-const { users, actionCreate } = require("./controller");
+const { users, actionCreate, actionDelete } = require("./controller");
 
 router.get("/datauser", users);
 router.post("/create", multer({ dest: os.tmpdir() }).single("image"), actionCreate);
+router.delete("/delete/:id", actionDelete);
 
 module.exports = router;

@@ -63,4 +63,23 @@ module.exports = {
       next(err);
     }
   },
+  actionDelete: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const apiData = await User.findOneAndRemove({
+        _id: id,
+      });
+      let currentImage = `${config.rootPath}/public/uploads/users/${apiData.image}`;
+      if (fs.existsSync(currentImage)) {
+        fs.unlinkSync(currentImage);
+      }
+      res.status(201).json({ msg: "data berhasil dihapus" });
+    } catch (err) {
+      return res.status(422).json({
+        error: 1,
+        message: err.message,
+        fields: err.errors,
+      });
+    }
+  },
 };
