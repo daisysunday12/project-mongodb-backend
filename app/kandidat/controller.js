@@ -47,7 +47,7 @@ module.exports = {
         let tmp_path = req.file.path;
         let originaExt = req.file.originalname.split(".")[req.file.originalname.split(".").length - 1];
         let filename = req.file.filename + "." + originaExt;
-        let target_path = path.resolve(config.rootPath, `public/uploads/data-kandidat/${filename}`);
+        let target_path = path.resolve(config.rootPath, `public/uploads/data-kandidat/img/${filename}`);
 
         const src = fs.createReadStream(tmp_path);
         const dest = fs.createWriteStream(target_path);
@@ -73,7 +73,7 @@ module.exports = {
               kewarganegaraan,
               prov,
               kab,
-              file: filename,
+              image: filename,
             });
 
             await data.save();
@@ -116,6 +116,29 @@ module.exports = {
 
         res.redirect("/kandidat");
       }
+    } catch (err) {
+      req.flash("alertMessage", `${err.message}`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/kandidat");
+    }
+  },
+  actionDelete: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const data = await Kandidat.findOneAndRemove({
+        _id: id,
+      });
+      let currentFile = `${config.rootPath}/public/uploads/data-kandidat/file/${data.file}`;
+      if (fs.existsSync(currentFile)) {
+        fs.unlinkSync(currentFile);
+      }
+      let currentImage = `${config.rootPath}/public/uploads/data-kandidat/img/${data.image}`;
+      if (fs.existsSync(currentImage)) {
+        fs.unlinkSync(currentImage);
+      }
+      req.flash("alertMessage", "Berhasil hapus voucher");
+      req.flash("alertStatus", "success");
+      res.redirect("/kandidat");
     } catch (err) {
       req.flash("alertMessage", `${err.message}`);
       req.flash("alertStatus", "danger");

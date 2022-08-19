@@ -3,15 +3,21 @@ var router = express.Router();
 // image
 const multer = require("multer");
 const os = require("os");
-// router
-const { viewSignin, actionSignin, actionLogout } = require("./controller");
-// const { isLoginAdmin } = require("../middleware/auth");
 
-/* GET home page. */
+// middleware
+const { isLoginAdmin } = require("../middleware/auth");
+
+// router
+const { viewSignin, actionSignin, actionLogout, actionCreate, viewCreate, index, actionDelete } = require("./controller");
+
 router.get("/", viewSignin);
 router.post("/", actionSignin);
 router.get("/logout", actionLogout);
 
-// router.use(isLoginAdmin);
+router.use(isLoginAdmin);
+router.get("/users", index);
+router.get("/create", viewCreate);
+router.post("/create", multer({ dest: os.tmpdir() }).single("image"), actionCreate);
+router.delete("/delete/:id", actionDelete);
 
 module.exports = router;

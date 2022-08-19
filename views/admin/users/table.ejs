@@ -1,0 +1,38 @@
+<table id="example2" class="table table-reponsive table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Nama</th>
+      <th>Username</th>
+      <th>Image</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let i=0; i < data.length; i++){ %>
+      <tr>
+        <td class="text-center">
+          <%= i + 1 %>
+        </td>
+        <td>
+          <%= data[i].name %>
+        </td>
+        <td>
+          <%= data[i].username %>
+        </td>
+        <td>
+          <img src="http://localhost:3000/public/uploads/users/<%= data[i].image %>" alt=""
+            srcset="http://localhost:3000/public/uploads/users/<%= data[i].image %>">
+        </td>
+        <td>
+          <form style="display: inline-block" action="/users/delete/<%= data[i]._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger btn-sm">
+              <i class="fas fa-trash"></i>
+              Hapus
+            </button>
+          </form>
+        </td>
+      </tr>
+      <% } %>
+  </tbody>
+</table>

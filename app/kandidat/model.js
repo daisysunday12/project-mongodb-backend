@@ -93,6 +93,9 @@ let kandidatSchema = mongoose.Schema(
     file: {
       type: String,
     },
+    image: {
+      type: String,
+    },
     pekerjaan: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Pekerjaan",

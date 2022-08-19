@@ -28,6 +28,9 @@ let userSchema = mongoose.Schema(
       type: String,
       require: [true, "Nomor telpon harus diisi"],
     },
+    image: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

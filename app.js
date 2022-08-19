@@ -8,14 +8,15 @@ const session = require("express-session");
 const flash = require("connect-flash");
 
 var dashboardRouter = require("./app/dashboard/router");
-var pekerjaanRouter = require("./app/pekerjaan/router");
+// var pekerjaanRouter = require("./app/pekerjaan/router");
+// var usersRouter = require("./app/users/router");
+// var kandidatRouter = require("./app/kandidat/router");
 var usersRouter = require("./app/users/router");
-var kandidatRouter = require("./app/kandidat/router");
 
 // api
-var apiPekerjaanRouter = require("./app/api/pekerjaan/router");
+// var apiPekerjaanRouter = require("./app/api/pekerjaan/router");
+// var apiKandidatRouter = require("./app/api/kandidat/router");
 var apiUsersRouter = require("./app/api/users/router");
-var apiKandidatRouter = require("./app/api/kandidat/router");
 
 const app = express();
 const URL = `/api/v1`;
@@ -44,13 +45,14 @@ app.use("/adminlte", express.static(path.join(__dirname, "/node_modules/admin-lt
 // routers
 app.use("/", usersRouter);
 app.use("/dashboard", dashboardRouter);
-app.use("/pekerjaan", pekerjaanRouter);
-app.use("/kandidat", kandidatRouter);
+// app.use("/pekerjaan", pekerjaanRouter);
+// app.use("/kandidat", kandidatRouter);
+// app.use("/users", usersRouter);
 
 // api
-app.use(`${URL}/pekerjaan`, apiPekerjaanRouter);
+// app.use(`${URL}/pekerjaan`, apiPekerjaanRouter);
+// app.use(`${URL}/kandidat`, apiKandidatRouter);
 app.use(`${URL}/users`, apiUsersRouter);
-app.use(`${URL}/kandidat`, apiKandidatRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
