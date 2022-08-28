@@ -90,6 +90,12 @@ let kandidatSchema = mongoose.Schema(
       maxlength: [100, "panjang lokasi sekarang harus antara 3 - 100 karakter"],
       minlength: [5, "panjang lokasi sekarang harus antara 3 - 100 karakter"],
     },
+    bulan: {
+      type: String,
+    },
+    tahun: {
+      type: String,
+    },
     file: {
       type: String,
       default: "default.pdf",

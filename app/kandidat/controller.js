@@ -73,6 +73,8 @@ module.exports = {
               kewarganegaraan,
               prov,
               kab,
+              bulan,
+              tahun,
               image: filename,
             });
 
@@ -107,6 +109,8 @@ module.exports = {
           kewarganegaraan,
           prov,
           kab,
+          bulan,
+          tahun
         });
 
         await data.save();

@@ -15,6 +15,24 @@ module.exports = {
       res.status(500).json({ message: err.message || `Internal server error` });
     }
   },
+  kandidatAll: async (req, res) => {
+    try {
+      const apiData = await Kandidat.find().populate("pekerjaan");
+      res.status(200).json(apiData);
+    } catch (err) {
+      res.status(500).json({ message: err.message || `Internal server error` });
+    }
+  },
+  kandidatDetails: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const apiDetails = await Kandidat.findOne({ _id: id }).populate("pekerjaan");
+      // res.status(200).json({ total: apiDetails.length, data: apiDetails });
+      res.status(200).json(apiDetails);
+    } catch (err) {
+      res.status(500).json({ message: err.message || `Internal server error` });
+    }
+  },
   actionCreate: async (req, res) => {
     try {
       const { pekerjaan, nama, tempat, tanggal, alamat, pendidikan, jurusan, sumber, jk, ketsumber, email, kab, prov, kewarganegaraan, notelp, lokasi, salary } = req.body;
@@ -82,7 +100,6 @@ module.exports = {
           prov,
           kab,
         });
-
         await apiData.save();
         res.status(201).json({ msg: "success", data: apiData });
       }
@@ -127,6 +144,61 @@ module.exports = {
             res.status(201).json({ msg: "success", data: apiData });
           } catch (err) {
             return res.status(422).json({
+              error: 1,
+              message: err.message,
+              fields: err.errors,
+            });
+          }
+        });
+      } else {
+        return res.status(422).json({
+          error: 1,
+          message: err.message,
+          fields: err.errors,
+        });
+      }
+    } catch (err) {
+      return res.status(422).json({
+        error: 1,
+        message: err.message,
+        fields: err.errors,
+      });
+    }
+  },
+  actionEditImage: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      if (req.file) {
+        let tmp_path = req.file.path;
+        let originaExt = req.file.originalname.split(".")[req.file.originalname.split(".").length - 1];
+        let filename = req.file.filename + "." + originaExt;
+        let target_path = path.resolve(config.rootPath, `public/uploads/data-kandidat/img/${filename}`);
+
+        const src = fs.createReadStream(tmp_path);
+        const dest = fs.createWriteStream(target_path);
+
+        src.pipe(dest);
+        src.on("end", async () => {
+          try {
+            const apiData = await Kandidat.findOne({ _id: id });
+
+            let currentImage = `${config.rootPath}/public/uploads/data-kandidat/img/${apiData.file}`;
+            if (fs.existsSync(currentImage)) {
+              fs.unlinkSync(currentImage);
+            }
+            await Kandidat.findOneAndUpdate(
+              {
+                _id: id,
+              },
+              {
+                image: filename,
+              }
+            );
+            res.status(201).json({ msg: "success", data: apiData });
+          } catch (err) {
+            return res.status(422).json({
+              msg: "failed",
               error: 1,
               message: err.message,
               fields: err.errors,
