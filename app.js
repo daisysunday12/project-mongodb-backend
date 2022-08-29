@@ -18,6 +18,7 @@ var usersRouter = require("./app/users/router");
 var apiPekerjaanRouter = require("./app/api/pekerjaan/router");
 var apiKandidatRouter = require("./app/api/kandidat/router");
 var apiUsersRouter = require("./app/api/users/router");
+const authRouter = require('./app/api/auth/router');
 
 const app = express();
 const URL = `/api/v1`;
@@ -55,6 +56,7 @@ app.use("/users", usersRouter);
 app.use(`${URL}/pekerjaan`, apiPekerjaanRouter);
 app.use(`${URL}/kandidat`, apiKandidatRouter);
 app.use(`${URL}/users`, apiUsersRouter);
+app.use(`${URL}/login`, authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

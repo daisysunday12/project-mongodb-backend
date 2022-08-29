@@ -6,7 +6,16 @@ const config = require("../../../config");
 module.exports = {
   landingPage: async (req, res) => {
     try {
-      const apiData = await Pekerjaan.find({status : 'Y'}).select("_id pekerjaan thumbnial");
+      const apiData = await Pekerjaan.find({ status: 'Y' }).select("_id pekerjaan thumbnial");
+      // res.status(200).json({ total: apiData.length, data: apiData });
+      res.status(200).json(apiData);
+    } catch (err) {
+      res.status(500).json({ message: err.message || `Internal server error` });
+    }
+  },
+  landingPageBackend: async (req, res) => {
+    try {
+      const apiData = await Pekerjaan.find().select("_id pekerjaan thumbnial");
       // res.status(200).json({ total: apiData.length, data: apiData });
       res.status(200).json(apiData);
     } catch (err) {
@@ -167,7 +176,7 @@ module.exports = {
           }
         });
       } else {
-        res.status(406).json({ message: err.message || `Internal server error` });  
+        res.status(406).json({ message: err.message || `Internal server error` });
       }
     } catch (err) {
       res.status(500).json({ message: err.message || `Internal server error` });
