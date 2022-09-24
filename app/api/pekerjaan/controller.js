@@ -22,6 +22,14 @@ module.exports = {
       res.status(500).json({ message: err.message || `Internal server error` });
     }
   },
+  dashboard: async (req, res) => {
+    try {
+      const apiData = await Pekerjaan.find().select("_id");
+      res.status(200).json(apiData);
+    } catch (err) {
+      res.status(500).json({ message: err.message || `Internal server error` });
+    }
+  },
   detailPage: async (req, res) => {
     try {
       const { id } = req.params;
